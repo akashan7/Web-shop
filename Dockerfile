@@ -1,12 +1,5 @@
-# Pull base image
-#From maven:3.3-jdk-8
-
-#RUN mkdir /home/new
-#WORKDIR /home/new
-#ADD target/WebShop.war /home/new
-
-# Pull base image
-From tomcat:8-jre8
-
-# Copy to images tomcat path
-ADD target/WebShop.war /usr/local/tomcat/webapps/
+FROM tomcat:8.5.40-jre8
+WORKDIR  /usr/local/tomcat
+COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+COPY context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
+COPY ./target/app-2.5-SNAPSHOT.war /usr/local/tomcat/webapps/myapp.war
